@@ -1,5 +1,5 @@
 gsap.registerPlugin(ScrollTrigger);
-
+//nav
 const initNavigation = function initializeTheNavigationAnimations() {
   const mainNavLinks = gsap.utils.toArray('.main-nav a');
   const mainNavLinksRev = gsap.utils.toArray('.main-nav a').reverse();
@@ -33,12 +33,21 @@ const initNavigation = function initializeTheNavigationAnimations() {
     },
     onEnter: ({ direction }) => navAnimation(direction),
     onLeaveBack: ({ direction }) => navAnimation(direction),
-    markers: true,
   });
+};
+//header
+const moveImages = function moveTheImagesInTheHeader(e) {
+  const { offsetX, offsetY, target } = e;
+  const { clientWidth, clientHeight } = target;
+  console.log(offsetX, offsetY, clientWidth, clientHeight);
+};
+const initHeaderTilt = function initializeTheImgHeaderTiltAnimation() {
+  document.querySelector('header').addEventListener('mousemove', moveImages);
 };
 
 const init = function initializeTheCode() {
   initNavigation();
+  initHeaderTilt();
 };
 
 window.addEventListener('load', () => init());
