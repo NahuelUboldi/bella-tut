@@ -238,6 +238,7 @@ header h1 span {
   top: 0;
   left: 0;
   background-color: #000000;
+  /* transform-style: preserve-3d; */
   pointer-events: none;
 }
 .hg__image--l {

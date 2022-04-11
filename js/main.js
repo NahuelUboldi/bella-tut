@@ -66,14 +66,56 @@ const moveImages = function moveTheImagesInTheHeader(e) {
 
   moveImagesAnimation(xPos, yPos, leftImages);
   moveImagesAnimation(xPos, yPos, rightImages);
+
+  gsap.to('.decor__circle', {
+    duration: 1.7,
+    x: 100 * xPos,
+    y: 120 * yPos,
+    ease: 'Power4.out',
+  });
 };
 const initHeaderTilt = function initializeTheImgHeaderTiltAnimation() {
   document.querySelector('header').addEventListener('mousemove', moveImages);
+};
+//reveal gallery
+const createHoverReveal = function createTheHoverRevealAnimation(e) {
+  const { mask, imageBlock } = e.target;
+  let tl = gsap.timeline({
+    defaults: {
+      duration: 0.7,
+      ease: 'Power4.out',
+    },
+  });
+
+  if (e.type === 'mouseenter') {
+    tl.to([mask, imageBlock], { yPercent: 0 });
+  }
+  if (e.type === 'mouseleave') {
+    tl.to(mask, { yPercent: 100 }).to(imageBlock, { yPercent: -101 }, 0);
+  }
+  return tl;
+};
+
+const initHoverReveal = function initializeTheGalleryRevealOnHover() {
+  const sections = document.querySelectorAll('.rg__column');
+  sections.forEach((section) => {
+    section.imageBlock = section.querySelector('.rg__image');
+    section.mask = section.querySelector('.rg__image--mask');
+
+    //reset the original position
+    gsap.set(section.imageBlock, { yPercent: -101 });
+    gsap.set(section.mask, { yPercent: 100 });
+
+    //add event listeners to each section
+    section.addEventListener('mouseenter', createHoverReveal);
+    section.addEventListener('mouseleave', createHoverReveal);
+  });
 };
 
 const init = function initializeTheCode() {
   initNavigation();
   initHeaderTilt();
+  initHoverReveal();
 };
 
 window.addEventListener('load', () => init());
