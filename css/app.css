@@ -303,7 +303,7 @@ header h1 span {
 /* =Reveal Gallery */
 .reveal-gallery {
   width: 100%;
-  height: 100vh;
+  flex-direction: column;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -313,6 +313,7 @@ header h1 span {
 }
 .rg__column {
   flex-grow: 1; /* equivalent to 33.33% */
+  min-height: 50vh;
   padding: 0 var(--h-gutter);
   display: flex;
   flex-direction: column;
@@ -335,7 +336,6 @@ header h1 span {
   font-weight: normal;
 }
 .rg__text {
-  max-width: 17vw;
   z-index: 1;
   position: relative;
 }
@@ -697,6 +697,21 @@ section {
 }
 
 @media only screen and (min-width: 768px) {
+  /* =Reveal Gallery */
+  .reveal-gallery {
+    flex-direction: row;
+    height: 100vh;
+  }
+  .rg__column {
+    min-height: auto;
+  }
+  .rg__text--copy {
+    position: absolute;
+    overflow: hidden;
+  }
+  .rg__text {
+    max-width: 17vw;
+  }
 }
 
 @media only screen and (min-width: 1140px) {
