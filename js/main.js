@@ -137,7 +137,7 @@ const handleWidthChange = function handleWindowWidthChange(mq) {
     console.log('we are on mobile');
   }
 };
-mq.addEventListener('change', handleWidthChange);
+mq.addListener(handleWidthChange);
 
 const init = function initializeTheCode() {
   initNavigation();
