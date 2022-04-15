@@ -19,6 +19,7 @@ export const initPinSteps = function initializeThePinNavigationEffect() {
     endTrigger: '#stage4',
     end: 'center center',
     pin: true,
+    pinReparent: true,
   });
 
   const updateBodyColor = (color) => {
@@ -53,12 +54,50 @@ export const initPinSteps = function initializeThePinNavigationEffect() {
   });
 };
 
+let bodyScrollBar;
 export const initScrollTo = function initializeTheScrollToFunctionality() {
   gsap.utils.toArray('.fixed-nav a').forEach((link) => {
     const target = link.getAttribute('href');
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      gsap.to(window, { duration: 1.5, scrollTo: target, ease: 'Power2.out' });
+      // gsap way doesn't work with smoothscrolling
+      // gsap.to(window, { duration: 1.5, scrollTo: target, ease: 'Power2.out' });
+
+      //smooth-scrollbar scrollintoview way
+      bodyScrollBar.scrollIntoView(document.querySelector(target), {
+        damping: 0.07,
+        offsetTop: 100,
+      });
     });
   });
+};
+
+export const initSmoothScrollbar = function initializeSmoothScrollbarlibrary() {
+  bodyScrollBar = Scrollbar.init(document.querySelector('#viewport'), {
+    damping: 0.07,
+  });
+
+  //remove horizontal scrollbar
+  bodyScrollBar.track.xAxis.element.remove();
+
+  // Tell ScrollTrigger to use these proxy getter/setter methods for the "body" element:
+  ScrollTrigger.scrollerProxy(document.body, {
+    scrollTop(value) {
+      if (arguments.length) {
+        bodyScrollBar.scrollTop = value; // setter
+      }
+      return bodyScrollBar.scrollTop; // getter
+    },
+    getBoundingClientRect() {
+      return {
+        top: 0,
+        left: 0,
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    },
+  });
+
+  // when the smooth scroller updates, tell ScrollTrigger to update() too:
+  bodyScrollBar.addListener(ScrollTrigger.update);
 };
