@@ -16,11 +16,13 @@
     />
   </head>
 
-  <body>
+  <body class="is-loading">
     <div id="viewport">
       <div class="loader">
         <div class="loader__mask">
-          <div class="inner"></div>
+          <div class="inner">
+            <div class="progress"></div>
+          </div>
           <!-- this will scale up -->
         </div>
       </div>
@@ -337,6 +339,8 @@
     </div>
     <!--viewport-->
 
+    <!-- JS -->
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.3/ScrollToPlugin.min.js"></script>

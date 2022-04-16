@@ -9,19 +9,21 @@ import {
   initPinSteps,
   initScrollTo,
 } from './sections/parallaxImages.js';
+import initLoader from './sections/loader.js';
 
 const mq = window.matchMedia('(min-width: 768px');
 mq.addEventListener('change', handleWidthChange);
 
-const init = function initializeTheCode() {
-  initSmoothScrollbar();
-  initNavigation();
-  initHeaderTilt();
-  handleWidthChange(mq);
-  initPortfolioHover();
-  initParallaxImages();
-  initPinSteps(); //fix the scrollbar
-  initScrollTo();
-};
+// const init = function initializeTheCode() {
+//   initLoader();
+//   initSmoothScrollbar();
+//   initNavigation();
+//   initHeaderTilt();
+//   handleWidthChange(mq);
+//   initPortfolioHover();
+//   initParallaxImages();
+//   initPinSteps(); //fix the scrollbar
+//   initScrollTo();
+// };
 
-window.addEventListener('load', () => init());
+// window.addEventListener('load', () => init());
