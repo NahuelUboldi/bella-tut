@@ -1,3 +1,5 @@
+import initPageTransitions from './pageTransitions';
+
 const select = (element) => document.querySelector(element);
 const selectAll = (element) => document.querySelectorAll(element);
 
@@ -38,7 +40,7 @@ function updateProgress(value) {
   });
 }
 imgLoad.on('done', function (instance) {
-  gsap.set(progressBar, { autoAlpha: 0, onComplete: initLoader });
+  gsap.set(progressBar, { autoAlpha: 0, onComplete: initPageTransitions });
 });
 
 const initLoader = function initializeTheLoaderAnimation() {

@@ -38,7 +38,10 @@ body {
 .is-loading {
   background-color: var(--bcg-loaderblue);
 }
-
+.is-transitioning {
+  pointer-events: none;
+  cursor: progress;
+}
 #viewport {
   overflow: hidden;
   position: fixed;
